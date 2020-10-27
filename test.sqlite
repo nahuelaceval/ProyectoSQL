@@ -1,0 +1,113 @@
+/*
+1
+ Vamos a chequear nuestras tablas.
+
+SELECT  * 
+FROM trips;
+
+SELECT *
+FROM riders;
+
+SELECT *
+FROM cars;
+
+2
+  Cúal es la primary ket de c/u?
+  -ID
+  -ID
+  -ID
+3
+ Ahora vamos a tratar de hacer cruces simples entre ellas.
+
+SELECT trips.id AS ID, 
+  riders.username AS NOMBRE_DE_USUARIO,
+  cars.model AS MODELO
+FROM trips, riders, cars;
+
+4
+  Supongamos que queremos crear un registro de viajes con los viajes y sus usuarios.
+
+Encuentre las columnas para unir entre viajes y ciclistas y combine las dos tablas utilizando LEFT JOIN.
+
+SELECT *
+FROM trips
+LEFT JOIN riders
+  ON trips.id = riders.id;
+
+  Supongamos ahora que sólo nos interesan columnas específicas
+
+SELECT trips.id,
+  trips.rider_id, 
+  trips.car_id,
+  trips.cost,
+  riders.id,
+  riders.first,
+  riders.last,
+  riders.username
+FROM trips
+LEFT JOIN riders
+  ON trips.id = riders.id;
+
+
+5
+Supongamos que queremos crear un vínculo entre los viajes y los automóviles utilizados durante esos viajes.
+
+Encuentra las columnas para unir y combina la tabla de viajes y autos usando un INNER JOIN.
+
+SELECT *
+FROM trips
+INNER JOIN cars
+ON trips.car_id = cars.id;
+
+6
+
+¡Los nuevos datos de los ciclistas están aquí! Hay tres nuevos usuarios este mes.
+
+Apila la mesa de riders encima de la nueva tabla llamada riders2.
+
+SELECT *
+FROM riders
+UNION 
+SELECT *
+FROM riders2;
+
+7
+ ¿Cuál es el costo promedio por viaje?
+
+SELECT ROUND(AVG(cost),2)
+FROM trips;
+
+8
+ REBU está buscando hacer una campaña de correo electrónico para todos los usuarios irregulares.
+
+Encuentra todos los pasajeros que han usado REBU menos de 500 veces. 
+
+SELECT *
+FROM riders
+WHERE total_trips < 500;
+
+  Si quisieramos buscar en ambas tablas, podríamos hacer algo así.
+
+SELECT *
+FROM riders
+WHERE total_trips < 500
+UNION
+SELECT *
+FROM riders2
+WHERE total_trips < 500;
+
+9
+  Calcula el número de autos que se encuentren activos.
+
+SELECT COUNT(*)
+FROM cars
+WHERE status = 'active';
+
+10
+  Por último, escribe una consulta que encuentre los dos autos que tienen el mayor número de viajes completados.  
+
+SELECT *
+FROM cars
+ORDER BY trips_completed DESC
+LIMIT 2;
+*/
